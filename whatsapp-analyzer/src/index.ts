@@ -5,6 +5,7 @@ import * as readline from "readline";
 import { parseWhatsApp, getMessagesByMember, getMessagesByPeriod, getMetrics } from "./parser.js";
 import { tools } from "./tools.js";
 import type { GetMessagesByMemberInput, GetMessagesByPeriodInput, ToolInput } from "./types.js";
+import { ToolName } from "./types.js";
 
 dotenv.config();
 
@@ -41,12 +42,12 @@ function ask(prompt: string): Promise<string> {
 }
 
 function processTool(toolName: string, toolInput: ToolInput) {
-  if (toolName === "get_messages_by_member") {
+  if (toolName === ToolName.GetMessagesByMember) {
     const { member } = toolInput as GetMessagesByMemberInput;
     return getMessagesByMember(messages, member).slice(0, 50);
   }
 
-  if (toolName === "get_messages_by_period") {
+  if (toolName === ToolName.GetMessagesByPeriod) {
     const { start, end } = toolInput as GetMessagesByPeriodInput;
     return getMessagesByPeriod(
       messages,
@@ -55,7 +56,7 @@ function processTool(toolName: string, toolInput: ToolInput) {
     ).slice(0, 50);
   }
 
-  if (toolName === "get_metrics") {
+  if (toolName === ToolName.GetMetrics) {
     return getMetrics(messages);
   }
 

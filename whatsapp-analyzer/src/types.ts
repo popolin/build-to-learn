@@ -14,3 +14,9 @@ export interface GetMessagesByPeriodInput {
 }
 
 export type ToolInput = GetMessagesByMemberInput | GetMessagesByPeriodInput | Record<never, never>;
+
+export enum ToolName {
+    GetMessagesByMember = "get_messages_by_member",
+    GetMessagesByPeriod = "get_messages_by_period",
+    GetMetrics = "get_metrics",
+}
